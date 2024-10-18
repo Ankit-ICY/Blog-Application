@@ -139,10 +139,10 @@ blogs = Blog.objects.annotate(similarity=TrigramSimilarity('title', query)).filt
 
 ```
 
-###Stemming and Ranking Results
+### Stemming and Ranking Results
 Full-text search functionality is powered by stemming and ranking algorithms, providing search results that are more relevant to the user's query. This improves search accuracy by matching words with similar roots.
 
-###Pagination
+### Pagination
 The blog list view is paginated, displaying 5 posts per page to improve readability and ease of navigation.
 
 ***Example of pagination in views:***
@@ -152,10 +152,10 @@ blogs = Blog.objects.all().order_by('-published_date')
 paginator = Paginator(blogs, 5)  # 5 blogs per page
 
 
-###Comment System with Likes
+### Comment System with Likes
 Users can comment on blog posts and like comments. The number of likes is shown next to each comment.
 
-###Sharing Blog via Email
+### Sharing Blog via Email
 A blog post can be shared via email using Django's send_mail function. Users can send the blog link to any email address.
 
 
@@ -173,14 +173,14 @@ def share_blog(request, blog_id):
 
 
 
-###User Authentication and Password Hashing
+### User Authentication and Password Hashing
 Django's built-in authentication system ensures secure handling of user credentials:
 
 -Password Hashing: Passwords are hashed before being stored in the database using Django’s default password hashing mechanism (PBKDF2).
 -Authentication: Session-based authentication allows users to securely log in, log out, and manage their profiles.
 
 
-###PostgreSQL Configuration
+### PostgreSQL Configuration
 If you want to use PostgreSQL for full-text search and trigram similarity, follow these steps:
 
 USE and Uncomment the PostgreSQL settings in settings.py:
