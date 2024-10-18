@@ -1,0 +1,96 @@
+/* Reset some default styles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* Container for the form */
+.container {
+    max-width: 500px; /* Limit the width of the form */
+    margin: 50px auto; /* Center the form */
+    padding: 30px; /* Add padding inside the container */
+    border: 1px solid #e1e1e1; /* Light border */
+    border-radius: 8px; /* Rounded corners */
+    background-color: #f9f9f9; /* Light background color */
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; /* Shadow effect */
+    background-color: #e9ecef;
+}
+
+/* Header styles */
+h2 {
+    text-align: center; /* Center the heading */
+    margin-bottom: 20px; /* Space below the heading */
+    color: #333; /* Dark text color */
+}
+
+/* Form group styles */
+.form-group {
+    margin-bottom: 15px; /* Space between form groups */
+}
+
+/* Label styles */
+label {
+    display: block; /* Block-level labels */
+    margin-bottom: 5px; /* Space below labels */
+    font-weight: bold; /* Bold labels */
+    color: #555; /* Slightly lighter color for labels */
+}
+
+/* Input styles */
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    width: 100%; /* Full width inputs */
+    padding: 10px; /* Padding for inputs */
+    border: 1px solid #ccc; /* Light border for inputs */
+    border-radius: 4px; /* Rounded corners */
+    transition: border-color 0.3s; /* Smooth transition for border color */
+}
+
+/* Focus state for inputs */
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus {
+    border-color: #007bff; /* Blue border on focus */
+    outline: none; /* Remove default outline */
+}
+
+/* Error message styles */
+.error-message {
+    color: #d9534f; /* Red color for error messages */
+    font-size: 14px; /* Font size for error messages */
+    margin-top: 5px; /* Space above error messages */
+}
+
+/* Button styles */
+.btn {
+    width: 100%; /* Full width button */
+    padding: 10px; /* Padding inside button */
+    border: none; /* Remove border */
+    border-radius: 4px; /* Rounded corners */
+    background-color: #007bff; /* Blue background */
+    color: white; /* White text */
+    font-size: 16px; /* Font size */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s; /* Smooth transition for background color */
+}
+
+.btn:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
+/* Footer text styles */
+.footer {
+    text-align: center; /* Center footer text */
+    margin-top: 15px; /* Space above footer */
+}
+
+.footer a {
+    color: #007bff; /* Link color */
+    text-decoration: none; /* Remove underline */
+}
+
+.footer a:hover {
+    text-decoration: underline; /* Underline on hover */
+}

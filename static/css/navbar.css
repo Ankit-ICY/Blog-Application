@@ -1,0 +1,148 @@
+/* General reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+}
+
+/* Navbar styling */
+.navbar {
+    background-color: #64a6bd; /* Dark background */
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.brand-logo a {
+    color: #fff; /* White text for logo */
+    font-size: 2rem;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.nav-links li {
+    position: relative;
+}
+
+.nav-links a {
+    color: #fff; /* White text */
+    text-decoration: none;
+    padding: 10px 15px;
+    font-size: 1rem;
+    transition: color 0.3s ease-in-out;
+}
+
+.nav-links a:hover {
+    color: #ffcc00; /* Hover effect */
+}
+
+.dropdown .dropdown-content {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #444; /* Slightly lighter than navbar */
+    min-width: 150px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.dropdown .dropdown-content a {
+    padding: 10px 15px;
+    display: block;
+    color: #fff;
+    text-decoration: none;
+}
+
+.dropdown .dropdown-content a:hover {
+    background-color: #555;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* Hamburger menu styling */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.hamburger span {
+    height: 3px;
+    width: 25px;
+    background-color: #fff;
+    margin: 4px;
+    border-radius: 2px;
+    transition: all 0.3s;
+}
+
+/* Active hamburger animation */
+.hamburger.active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+
+.hamburger.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(6px, -6px);
+}
+
+/* Responsive behavior */
+@media screen and (max-width: 768px) {
+    .nav-links {
+        position: absolute;
+        top: 60px;
+        right: 0;
+        background-color: #333;
+        width: 100%;
+        height: 100vh;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        transform: translateX(100%);
+        transition: transform 0.5s ease-in-out;
+    }
+
+    .nav-links.active {
+        transform: translateX(0);
+    }
+
+    .hamburger {
+        display: flex;
+    }
+
+    .nav-links a {
+        padding: 20px;
+        font-size: 1.2rem;
+    }
+
+    .nav-links li {
+        width: 100%;
+        text-align: center;
+    }
+
+    .dropdown .dropdown-content {
+        position: static;
+        background-color: transparent;
+        box-shadow: none;
+    }
+
+    .dropdown .dropdown-content a {
+        color: #fff;
+    }
+}

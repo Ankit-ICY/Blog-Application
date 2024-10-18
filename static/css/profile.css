@@ -1,0 +1,109 @@
+/* Reset some default styles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* Container for the form */
+.container {
+    max-width: 600px; /* Limit the width of the form */
+    margin: 50px auto; /* Center the form */
+    padding: 20px; /* Add padding inside the container */
+    border: 1px solid #e1e1e1; /* Light border */
+    border-radius: 8px; /* Rounded corners */
+    background-color: #f9f9f9; /* Light background color */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+/* Header styles */
+h2 {
+    text-align: center; /* Center the heading */
+    margin-bottom: 20px; /* Space below the heading */
+    color: #333; /* Dark text color */
+}
+
+h3 {
+    margin: 20px 0 10px; /* Space around subheadings */
+    color: #555; /* Slightly lighter color for subheadings */
+}
+
+/* Form styles */
+.form-group {
+    margin-bottom: 20px; /* Space between form groups */
+}
+
+label {
+    display: block; /* Block-level labels */
+    margin-bottom: 5px; /* Space below labels */
+    font-weight: bold; /* Bold labels */
+    color: #333; /* Dark color for labels */
+}
+
+/* Input and textarea styles */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+textarea {
+    width: 100%; /* Full width inputs */
+    padding: 10px; /* Padding for inputs */
+    border: 1px solid #ccc; /* Light border for inputs */
+    border-radius: 4px; /* Rounded corners */
+    transition: border-color 0.3s; /* Smooth transition for border color */
+}
+
+/* Focus state for inputs */
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+textarea:focus {
+    border-color: #007bff; /* Blue border on focus */
+    outline: none; /* Remove default outline */
+}
+
+/* Button styles */
+.btn {
+    width: 100%; /* Full width button */
+    padding: 10px; /* Padding inside button */
+    border: none; /* Remove border */
+    border-radius: 4px; /* Rounded corners */
+    background-color: #007bff; /* Blue background */
+    color: white; /* White text */
+    font-size: 16px; /* Font size */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s; /* Smooth transition for background color */
+}
+
+.btn:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
+/* Footer text styles */
+.footer {
+    text-align: center; /* Center footer text */
+    margin-top: 20px; /* Space above footer */
+}
+
+.footer a {
+    color: #007bff; /* Link color */
+    text-decoration: none; /* Remove underline */
+}
+
+.footer a:hover {
+    text-decoration: underline; /* Underline on hover */
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 600px) {
+    .container {
+        margin: 20px; /* Less margin on smaller screens */
+    }
+
+    h2 {
+        font-size: 24px; /* Responsive heading size */
+    }
+
+    h3 {
+        font-size: 18px; /* Responsive subheading size */
+    }
+}

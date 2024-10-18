@@ -1,0 +1,25 @@
+{% comment %} {% extends "base_generic.html" %} {% endcomment %}
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'css/profile.css' %}">
+
+{% block content %}
+    <div class="container">
+        <h2>Profile</h2>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <h3>User Info</h3>
+                {{ u_form.as_p }}
+            </div>
+            <div class="form-group">
+                <h3>Profile Info</h3>
+                {{ p_form.as_p }}
+            </div>
+            <button type="submit" class="btn">Update</button>
+        </form>
+        <div class="footer">
+            <p><a href="#">Back to Dashboard</a></p>
+        </div>
+    </div>
+{% endblock %}

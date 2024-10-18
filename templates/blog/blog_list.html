@@ -1,0 +1,67 @@
+{% extends "users/navbar.html" %}
+{% load static %}
+
+{% block title %}Recent Blogs{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="{% static 'css/blog_list.css' %}">
+{% endblock %}
+
+{% block content %}
+<main>
+    <div id="heading">
+      <h1><span>Recent</span> Blogs ({{ total_blogs }})</h1>
+      <!-- <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/575957/rss-icon.png" /> -->
+    </div>
+
+    <form method="GET" action="{% url 'blog_list' %}">
+        <input type="text" name="q" placeholder="Search by blog title..." value="{{ request.GET.q }}">
+        <button type="submit">Search</button>
+    </form>
+
+    {% for blog in page_obj %}
+    <article>
+      <img src="{% if blog.image %}{{ blog.image.url }}{% else %}{% static '\collections\blog.jpg' %}{% endif %}" alt="Blog Image" />
+      <div class="text">
+            <h2><a href="{% url 'blog_detail' blog.slug %}">{{ blog.title }}</a></h2>
+            <p>{{ blog.created_at|date:"F d, Y" }}</p>
+            <p>{{ blog.content|truncatewords:30|safe }}</p>
+            
+            <!-- Tags Section -->
+            {% if blog.tags.all %}
+                <div class="tags">
+                    {% for tag in blog.tags.all %}
+                        Tags : <span class="tag">#{{ tag.name }}</span>
+                    {% endfor %}
+                </div>
+            {% endif %}
+            <a href="{% url 'blog_detail' blog.slug %}">Read More
+                <i class="fa fa-long-arrow-right"></i>
+            </a>
+        </div>
+    </article>
+    {% empty %}
+    <p>No blog posts available.</p>
+    {% endfor %}
+
+
+    {% if page_obj.has_other_pages %}
+    <p style="font-weight: bold; ">Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.</p>
+    <div class="pagination">
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+                <a href="?page=1">&laquo; first</a>
+                <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+            {% endif %}
+          
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}">next</a>
+                <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+    {% endif %}
+</main>
+{% endblock %}

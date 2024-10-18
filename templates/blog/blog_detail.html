@@ -1,0 +1,170 @@
+{% extends 'users/navbar.html' %}
+
+{% block title %}Blog Detail{% endblock %}
+
+{% block extra_css %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/blog_detail.css' %}">
+{% endblock %}
+
+
+
+{% block content %}
+<div style="display: flex; justify-content: center; margin: 5px;"> 
+<a href="javascript:history.back()" class="back-button">← Back</a>
+</div>
+
+
+<div class="blog-detail">
+    <h1>{{ blog.title }}</h1>
+    <p>Published on: {{ blog.created_at|date:"F j, Y" }}</p>
+    <div class="blog-content">
+        <p>{{ blog.content|safe }}</p>
+    </div>
+
+    <div class="share-blog">
+        <h3>Share this blog:</h3>
+        <form method="POST" action="{% url 'share_blog' blog.slug %}">
+            {% csrf_token %}
+            <input type="email" name="email" placeholder="Enter your email" required>
+            <button type="submit">Share</button>
+        </form>
+    </div>
+
+    <div class="comments-section">
+      <h3>Comments</h3>
+      <form method="POST" action="{% url 'add_comment' blog.slug %}" id="commentForm">
+          {% csrf_token %}
+          <textarea name="content" rows="4" placeholder="Add your comment here..." required></textarea>
+          <button type="submit">Submit Comment</button>
+      </form>
+  
+      <!-- Success message container (hidden initially) -->
+      <div id="commentSuccess" style="display:none; color: green; margin-top: 10px;">Comment posted successfully!</div>
+  
+      <div class="comment-list">
+          {% for comment in blog.comments.all %}
+              <div class="comment-item" data-comment-id="{{ comment.id }}">
+                  <p><strong>{{ comment.user.username }}</strong> says:</p>
+                  <p>{{ comment.content }}</p>
+                  <p>
+                      <span>{{ comment.likes.count }} Likes</span>
+                      <a href="{% url 'like_comment' comment.id %}">
+                          {% if request.user in comment.likes.all %}
+                              Unlike
+                          {% else %}
+                              Like
+                          {% endif %}
+                      </a>
+                      |
+                      <span>{{ comment.dislikes.count }} Dislikes</span>
+                      <a href="{% url 'dislike_comment' comment.id %}">
+                          {% if request.user in comment.dislikes.all %}
+                              Undislike
+                          {% else %}
+                              Dislike
+                          {% endif %}
+                      </a>
+                  </p>
+              </div>
+          {% empty %}
+              <p>No comments yet. Be the first to comment!</p>
+          {% endfor %}
+      </div>
+  </div>
+  
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+
+  // blog_detail.js
+  document.addEventListener("DOMContentLoaded", () => {
+    const commentForm = document.querySelector(".comments-section form");
+    const commentSuccessMessage = document.getElementById("commentSuccess"); 
+    if (commentForm) {
+        commentForm.addEventListener("submit", (event) => {
+            event.preventDefault(); 
+  
+            const formData = new FormData(commentForm);
+  
+            fetch(commentForm.action, {
+                method: "POST",
+                body: formData,
+                headers: {
+                    "X-Requested-With": "XMLHttpRequest",
+                },
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    commentSuccessMessage.style.display = "block";
+                    commentSuccessMessage.textContent = "Comment Posted ";
+  
+                    setTimeout(() => {
+                        window.location.reload();
+                    }, 2000); 
+                } else {
+                    alert("Error adding comment. Please try again.");
+                }
+            })
+            .catch(error => {
+                console.error("Error:", error);
+            });
+        });
+    }
+  });
+  
+  
+
+function likeComment(commentId) {
+  fetch(`/like_comment/${commentId}/`, {
+      method: 'POST',
+      headers: {
+          'X-CSRFToken': getCookie('csrftoken'), 
+      },
+  })
+  .then(response => response.json())
+  .then(data => {
+      const commentItem = document.querySelector(`.comment-item[data-comment-id="${commentId}"]`);
+      const likesCount = commentItem.querySelector('.reaction span:nth-child(2)');
+      likesCount.textContent = `${data.likes} Likes`;
+  });
+}
+
+// Function to handle disliking a comment
+function dislikeComment(commentId) {
+  fetch(`/dislike_comment/${commentId}/`, {
+      method: 'POST',
+      headers: {
+          'X-CSRFToken': getCookie('csrftoken'), 
+      },
+  })
+  .then(response => response.json())
+  .then(data => {
+      const commentItem = document.querySelector(`.comment-item[data-comment-id="${commentId}"]`);
+      const dislikesCount = commentItem.querySelector('.reaction span:nth-child(4)');
+      dislikesCount.textContent = `${data.dislikes} Dislikes`;
+  });
+}
+
+function getCookie(name) {
+  let cookieValue = null;
+  if (document.cookie && document.cookie !== '') {
+      const cookies = document.cookie.split(';');
+      for (let i = 0; i < cookies.length; i++) {
+          const cookie = cookies[i].trim();
+          if (cookie.substring(0, name.length + 1) === (name + '=')) {
+              cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+              break;
+          }
+      }
+  }
+  return cookieValue;
+}
+
+</script>
+
+{% endblock %}

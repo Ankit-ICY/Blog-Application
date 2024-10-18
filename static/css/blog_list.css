@@ -1,0 +1,198 @@
+main{
+  display: flex;
+  flex-direction: column;
+  max-width: 780px;
+  min-width: 80%;
+  
+  margin: 0 auto;
+  
+}
+
+article{
+  display: flex;
+  align-items: flex-start;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  background-color: #e9ecef;
+  padding: 10px;
+}
+
+#heading{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Styling */
+
+#heading h1 span{
+  font-size: 1em;
+  color: #F2861D;
+}
+
+article{
+  border-bottom: 1px solid #e1e1e1;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+}
+
+article img{
+  width: 150px; /* New width for the image */
+  height: auto;
+  margin-right: 15px;
+  object-fit: cover; /* Ensures image fits within dimensions */
+  border-radius: 5px; /* Optional */
+}
+
+span{
+  font-size: 11px;
+}
+
+p{
+  font-size: 13px;
+}
+
+h2{
+  margin: 0;
+  padding: 0;
+  line-height: 1em;
+}
+
+@media (max-width: 779px){
+  main{
+    max-width: 90%;
+    margin: 0 auto;
+    min-width: none;
+  }
+
+  article{
+    flex-direction: column;
+  }
+
+  article img{
+    width: 100%; /* Full width for smaller screens */
+    margin-bottom: 20px;
+  }
+}
+.pagination {
+  display: flex;
+  justify-content: center; /* Center the pagination */
+  margin: 20px 0; /* Add space above and below */
+}
+
+.step-links {
+  list-style: none; /* Remove default list styling */
+  padding: 0; /* Remove default padding */
+}
+
+.step-links a {
+  text-decoration: none; /* Remove underline from links */
+  padding: 10px 15px; /* Add padding for clickable area */
+  margin: 0 5px; /* Add spacing between links */
+  border: 1px solid #F2861D; /* Border around each link */
+  border-radius: 5px; /* Rounded corners */
+  background-color: #F2861D; /* Background color */
+  color: #ffffff; /* Text color */
+  transition: background-color 0.3s; /* Smooth transition for hover */
+}
+
+.step-links a:hover {
+  background-color: #F2861D; /* Darker background on hover */
+  border-color: #0056b3; /* Darker border on hover */
+}
+
+.step-links a:disabled {
+  background-color: #e0e0e0; /* Light gray for disabled links */
+  color: #666; /* Darker gray text */
+  border: 1px solid #d0d0d0; /* Light gray border */
+  cursor: not-allowed; /* Not allowed cursor */
+}
+
+.step-links a:first-child {
+  margin-left: 0; /* Remove margin from the first link */
+}
+
+.step-links a:last-child {
+  margin-right: 0; /* Remove margin from the last link */
+}
+
+.step-links p {
+  margin: 0 15px; /* Margin for page number text */
+  display: flex;
+  align-items: center; /* Center align text vertically */
+}
+
+.step-links .active {
+  background-color: #F2861D; /* Active page background */
+  color: #ffffff; /* Active page text color */
+  border-color: #F2861D; /* Active page border */
+  pointer-events: none; /* Disable pointer events */
+}
+/* Search Form Styles */
+form {
+  display: flex; /* Use flexbox for layout */
+  justify-content: center; /* Center the form */
+  margin: 20px 0; /* Margin above and below the form */
+}
+
+input[type="text"] {
+  width: 300px; /* Fixed width for the input field */
+  padding: 10px; /* Padding inside the input field */
+  border: 1px solid #ccc; /* Light border */
+  border-radius: 5px 0 0 5px; /* Rounded corners on the left */
+  font-size: 16px; /* Font size */
+  outline: none; /* Remove default outline */
+  transition: border-color 0.3s; /* Smooth border color transition */
+}
+
+input[type="text"]:focus {
+  border-color: #F2861D; /* Change border color on focus */
+}
+
+button {
+  padding: 10px 15px; /* Padding inside the button */
+  background-color: #F2861D; /* Primary button color */
+  color: #fff; /* Text color */
+  border: none; /* Remove border */
+  border-radius: 0 5px 5px 0; /* Rounded corners on the right */
+  cursor: pointer; /* Change cursor to pointer */
+  font-size: 16px; /* Font size */
+  transition: background-color 0.3s; /* Smooth background color transition */
+}
+
+button:hover {
+  background-color: #F2861D; /* Darken button on hover */
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
+  input[type="text"] {
+      width: 100%; /* Full width on small screens */
+  }
+
+  button {
+      width: auto; /* Auto width for button */
+  }
+}
+/* Blog List CSS */
+
+/* Style for the tags container */
+.tags {
+  margin-top: 10px; /* Space above the tags */
+}
+
+/* Individual tag styling */
+.tag {
+  display: inline-block; /* Inline block to allow spacing */
+  background-color: #F2861D; /* Tag background color */
+  color: white; /* Tag text color */
+  padding: 5px 10px; /* Padding around text */
+  border-radius: 4px; /* Rounded corners */
+  margin-right: 5px; /* Space between tags */
+  font-size: 14px; /* Tag font size */
+  transition: background-color 0.3s; /* Smooth background color transition */
+}
+
+/* Hover effect for tags */
+.tag:hover {
+  background-color: #6f3800; /* Darker blue on hover */
+}
