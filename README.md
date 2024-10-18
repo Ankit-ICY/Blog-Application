@@ -18,7 +18,6 @@ This is a Django-based blog application that provides a fully functional bloggin
   - [Sharing Blog via Email](#sharing-blog-via-email)
   - [User Authentication & Password Hashing](#user-authentication-and-password-hashing)
 - [PostgreSQL Configuration](#postgresql-configuration)
-- [License](#license)
 
 ---
 
@@ -137,3 +136,68 @@ from django.db.models.functions import TrigramSimilarity
 
 query = 'search term'
 blogs = Blog.objects.annotate(similarity=TrigramSimilarity('title', query)).filter(similarity__gt=0.1).order_by('-similarity')
+
+```
+
+###Stemming and Ranking Results
+Full-text search functionality is powered by stemming and ranking algorithms, providing search results that are more relevant to the user's query. This improves search accuracy by matching words with similar roots.
+
+###Pagination
+The blog list view is paginated, displaying 5 posts per page to improve readability and ease of navigation.
+
+***Example of pagination in views:***
+from django.core.paginator import Paginator
+
+blogs = Blog.objects.all().order_by('-published_date')
+paginator = Paginator(blogs, 5)  # 5 blogs per page
+
+
+###Comment System with Likes
+Users can comment on blog posts and like comments. The number of likes is shown next to each comment.
+
+###Sharing Blog via Email
+A blog post can be shared via email using Django's send_mail function. Users can send the blog link to any email address.
+
+
+
+from django.core.mail import send_mail
+
+def share_blog(request, blog_id):
+    blog = get_object_or_404(Blog, id=blog_id)
+    send_mail(
+        subject=f"Check out this blog: {blog.title}",
+        message=blog.content,
+        from_email='your_email@example.com',
+        recipient_list=[recipient_email],
+    )
+
+
+
+###User Authentication and Password Hashing
+Django's built-in authentication system ensures secure handling of user credentials:
+
+-Password Hashing: Passwords are hashed before being stored in the database using Django’s default password hashing mechanism (PBKDF2).
+-Authentication: Session-based authentication allows users to securely log in, log out, and manage their profiles.
+
+
+###PostgreSQL Configuration
+If you want to use PostgreSQL for full-text search and trigram similarity, follow these steps:
+
+USE and Uncomment the PostgreSQL settings in settings.py:
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'your_database_name',
+        'USER': 'your_postgres_user',
+        'PASSWORD': 'your_postgres_password',
+        'HOST': 'localhost',
+        'PORT': '5432',
+    }
+}
+
+Run the database migrations:
+python manage.py migrate
+
+
+
